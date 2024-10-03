@@ -33,7 +33,7 @@ let index     = fs.readFileSync('./index.html', 'utf8')
 */
 const replacer = {
   "{IMAGE}"       : `${'linitsh/testy'}`,
-  "{VERSION}"     : `${'0.1.0'}`,
+  "{VERSION}"     : `${'0.2.0'}`,
   "{POD}"         : `${process.env.HOSTNAME}`,
   "{DESCRIPTION}" : `${'null'}`,
   "{CODE}"        : `${JSON.stringify(process.env,null,2)}`,
