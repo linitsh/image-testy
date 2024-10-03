@@ -36,7 +36,7 @@ const replacer = {
   "{VERSION}"     : `${'0.1.0'}`,
   "{POD}"         : `${process.env.HOSTNAME}`,
   "{DESCRIPTION}" : `${'null'}`,
-  "{CODE}"        : `${JSON.stringify(process.env)}`,
+  "{CODE}"        : `${JSON.stringify(process.env,null,2)}`,
 }
 for (const [key, value] of Object.entries(replacer)) {
   index = index.replace(key, value)

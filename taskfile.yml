@@ -3,9 +3,15 @@ version: '3'
 env:
   CI_USER: linitsh
   CI_APP : testy
-  CI_TAG : 0.1.0
+  CI_TAG : 0.2.0
 dotenv: ['.env']
 tasks:
+
+  auto:
+  - task: git
+  - task: build
+  - task: retag
+  - task: push
 
   build: docker build -t $CI_APP .
 
