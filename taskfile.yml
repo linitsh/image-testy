@@ -18,3 +18,8 @@ tasks:
   run  : docker run --name $CI_APP -d --rm -p 8080:3000 $CI_APP
 
   stop : docker stop $CI_APP
+
+  git:
+  - git add .
+  - git commit -m "update"
+  - git push

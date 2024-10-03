@@ -1,3 +1,12 @@
-# How to Set Up ArgoCD for Production? (EKS - ECR - Helm - App of Apps - Image Updater - GitOps)
+---
+title     : Test image
+tags      : []
+categories: []
+---
+---
+### Test image repo
 
-You can find tutorial [here](https://youtu.be/_G_RY5trQao).
+routes:
+
+- / => info
+- /healthcheck => OK
