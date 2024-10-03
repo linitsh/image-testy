@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://json.schemastore.org/taskfile.json
+version: '3'
+env:
+  CI_USER: linitsh
+  CI_APP : testy
+  CI_TAG : 0.1.0
+dotenv: ['.env']
+tasks:
+
+  build: docker build -t $CI_APP .
+
+  retag: docker tag $CI_APP $CI_USER/$CI_APP:$CI_TAG
+
+  login: docker login -u $CI_USER -p $CI_TOKEN
+
+  push : docker push $CI_USER/$CI_APP:$CI_TAG
+
+  run  : docker run --name $CI_APP -d --rm -p 8080:3000 $CI_APP
+
+  stop : docker stop $CI_APP

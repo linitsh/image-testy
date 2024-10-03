@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Testy</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless.orange.min.css">
+        <style>
+            .b-container {
+                display: inline-flex;
+                flex-direction: row;
+                border-top: 1px solid #ccc;
+                border-left: 1px solid #ccc;
+            }
+            .b-container__left {
+                display: flex;
+                flex-direction: column;
+            }
+            .b-container__right {
+                display: flex;
+                flex-direction: column;
+            }
+            .b-container__line {
+                padding: 5px 10px;
+                border-right: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+            }
+            .b-container__line_left {
+                font-weight: bold;
+            } 
+            .b-container__line_right {
+                color: var(--pico-primary-background)              
+            } 
+        </style>
+    </head>
+    <body>
+        <header>
+            <h4>Worked</h4>
+        </header>
+        <main>
+            <div class="b-container">
+                <div class="b-container__left">
+                    <div class="b-container__line b-container__line_left">Image</div>
+                    <div class="b-container__line b-container__line_left">Version</div>
+                    <div class="b-container__line b-container__line_left">Pod</div>
+                    <div class="b-container__line b-container__line_left">Description</div>
+                </div>
+                <div class="b-container__right">
+                    <div class="b-container__line b-container__line_right">{IMAGE}</div>
+                    <div class="b-container__line b-container__line_right">{VERSION}</div>
+                    <div class="b-container__line b-container__line_right">{POD}</div>
+                    <div class="b-container__line b-container__line_right">{DESCRIPTION}</div>
+                </div>
+            </div>
+        </main>
+<footer><pre><code>
+{CODE}
+
+</code></pre></footer>
+        <script>
+            console.log("Hello World!")
+        </script>
+    </body>
+
+</html>
