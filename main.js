@@ -37,7 +37,7 @@ function CODE(){
   for (const [key, value] of Object.entries(obj)) {
     result.push(`${key} : <span style='limegreen'>${value}</span>`)
   }
-  return result.sort().join('\n')
+  return result.sort((a,b)=>a[0]<b[0]).join('\n')
 }
 const replacer = {
   "{IMAGE}"       : `${'linitsh/testy'}`,
