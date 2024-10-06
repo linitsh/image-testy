@@ -51,7 +51,7 @@ function CODE(){
 }
 const replacer = {
   "{IMAGE}"       : `${'linitsh/testy'}`,
-  "{VERSION}"     : `${'0.4.0'}`,
+  "{VERSION}"     : `${'0.5.0'}`,
   "{POD}"         : `${process.env.HOSTNAME}`,
   "{TIME}"        : `${new Date().toLocaleTimeString()}`,
   "{CODE}"        : `${CODE()}`,
