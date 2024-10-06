@@ -37,7 +37,15 @@ function CODE(){
   for (const [key, value] of Object.entries(obj)) {
     result.push([`${key}`,`<span style='color:limegreen'>${value}</span>`])
   }
-  result = result.sort((a,b)=>a[0]<b[0])
+  result = result.sort(function (a, b) {
+    if (a[0] < b[0]) {
+      return -1;
+    }
+    if (a[0] > b[0]) {
+      return 1;
+    }
+    return 0;
+  });
   result = result.map((a)=>`${a[0]} = ${a[1]}`).join('\n')
   return result
 }
