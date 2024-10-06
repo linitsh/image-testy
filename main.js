@@ -35,9 +35,11 @@ function CODE(){
   let obj = process.env
   let result = []
   for (const [key, value] of Object.entries(obj)) {
-    result.push(`${key} : <span style='limegreen'>${value}</span>`)
+    result.push([`${key}`,`<span style='color:limegreen'>${value}</span>`])
   }
-  return result.sort((a,b)=>a[0]<b[0]).join('\n')
+  result = result.sort((a,b)=>a[0]<b[0])
+  result = result.map((a)=>`${a[0]} = ${a[1]}`).join('\n')
+  return result
 }
 const replacer = {
   "{IMAGE}"       : `${'linitsh/testy'}`,
