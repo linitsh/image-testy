@@ -31,12 +31,20 @@ let index     = fs.readFileSync('./index.html', 'utf8')
     SVC_NP_TESTY_SERVICE_PORT_HTTP: '8090'
   }
 */
+function CODE(){
+  let obj = process.env
+  let result = []
+  for (const [key, value] of Object.entries(obj)) {
+    result.push(`${key} : <span style='limegreen'>${value}</span>`)
+  }
+  return result.join('\n')
+}
 const replacer = {
   "{IMAGE}"       : `${'linitsh/testy'}`,
-  "{VERSION}"     : `${'0.3.0'}`,
+  "{VERSION}"     : `${'0.4.0'}`,
   "{POD}"         : `${process.env.HOSTNAME}`,
   "{TIME}"        : `${new Date().toLocaleTimeString()}`,
-  "{CODE}"        : `${JSON.stringify(process.env,null,2)}`,
+  "{CODE}"        : `${CDOE()}`,
 }
 for (const [key, value] of Object.entries(replacer)) {
   index = index.replace(key, value)
