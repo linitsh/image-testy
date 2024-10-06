@@ -44,7 +44,7 @@ const replacer = {
   "{VERSION}"     : `${'0.4.0'}`,
   "{POD}"         : `${process.env.HOSTNAME}`,
   "{TIME}"        : `${new Date().toLocaleTimeString()}`,
-  "{CODE}"        : `${CDOE()}`,
+  "{CODE}"        : `${CODE()}`,
 }
 for (const [key, value] of Object.entries(replacer)) {
   index = index.replace(key, value)
