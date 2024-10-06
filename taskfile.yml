@@ -3,7 +3,7 @@ version: '3'
 env:
   CI_USER: linitsh
   CI_APP : testy
-  CI_TAG : 0.4.0
+  CI_TAG : 0.5.0
 dotenv: ['.env']
 tasks:
   default: task -a
