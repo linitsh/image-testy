@@ -6,6 +6,7 @@ COPY . .
 
 RUN npm install
 
-CMD ["node", "main.js"]
+ENTRYPOINT ["node", "main.js"]
+CMD [ "" ]
 
 EXPOSE 3000

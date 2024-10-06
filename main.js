@@ -35,7 +35,7 @@ const replacer = {
   "{IMAGE}"       : `${'linitsh/testy'}`,
   "{VERSION}"     : `${'0.3.0'}`,
   "{POD}"         : `${process.env.HOSTNAME}`,
-  "{DESCRIPTION}" : `${'null'}`,
+  "{TIME}"        : `${new Date().toLocaleTimeString()}`,
   "{CODE}"        : `${JSON.stringify(process.env,null,2)}`,
 }
 for (const [key, value] of Object.entries(replacer)) {
