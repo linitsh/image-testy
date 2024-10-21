@@ -29,7 +29,7 @@ tasks:
 
   save:
   - git add .
-  - git commit -m {{ default "save" .CLI_ARGS }}
+  - git commit -m {{ default "save" (q .CLI_ARGS) }}
   - git push
 
-  test: echo {{ default "save" .CLI_ARGS }}
+  test: echo {{ default "save" (q .CLI_ARGS ) }}
