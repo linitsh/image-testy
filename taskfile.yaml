@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://json.schemastore.org/taskfile.json
+version: '3'
+env:
+  NAME: testy-bun
+
+tasks:
+  default: task -a
+
+  start: bun run index.ts
+
+  docker-run:
+  - docker build -t ${NAME} .
+  - docker run -d --rm --name ${NAME} -p 8080:3000 ${NAME} 
+  - echo "http://localhost:8080"
+
+  docker-stop:
+  - docker stop ${NAME}
