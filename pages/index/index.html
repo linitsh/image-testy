@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Testy</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless.orange.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <div>Testy💚</div>
+        </header>
+        <main>
+            <div class="b-container">
+                <div class="b-container__left">
+                    <div class="b-container__line b-container__line_left">Image</div>
+                    <div class="b-container__line b-container__line_left">Version</div>
+                    <div class="b-container__line b-container__line_left">Pod</div>
+                    <div class="b-container__line b-container__line_left">Time</div>
+                </div>
+                <div class="b-container__right">
+                    <div class="b-container__line b-container__line_right">{IMAGE}</div>
+                    <div class="b-container__line b-container__line_right">{VERSION}</div>
+                    <div class="b-container__line b-container__line_right">{POD}</div>
+                    <div class="b-container__line b-container__line_right">{TIME}</div>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <form class="b-form form-sql">
+                    <h5>SQL</h5>
+                    <div>
+                        <input name="sql" type="text" value="SELECT * FROM testy;">
+                    </div>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                    <div>
+                        <pre><code class="ans-sql ans"></code></pre>
+                    </div>
+                </form>
+                <hr>
+                <form class="b-form form-exec">
+                    <h5>EXEC</h5>
+                    <div>
+                        <input name="exec" type="text" value="ls -la">
+                    </div>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+                    <div>
+                        <pre><code class="ans-exec ans"></code></pre>
+                    </div>
+                </form>
+                <hr>
+            </div>
+            <pre><code>{CODE}</code></pre>
+        </main>
+        <script src="main.js"></script>
+    </body>
+
+</html>
