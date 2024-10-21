@@ -1,15 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Testy</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless.orange.min.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless.orange.min.css">
+        <style>
+            h5{margin:0}
+            .b-container {
+                display: inline-flex;
+                flex-direction: row;
+                border-top: 1px solid #ccc;
+                border-left: 1px solid #ccc;
+            }
+
+            .b-container__left {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .b-container__right {
+                min-width: 360px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .b-container__line {
+                padding: 5px 10px;
+                border-right: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+            }
+
+            .b-container__line_left {
+                font-weight: bold;
+            }
+
+            .b-container__line_right {
+
+                color: var(--pico-primary-background)
+            }
+
+            footer * {
+                font-size: 12px;
+            }
+
+            .b-form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .b-form * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .b-form input {
+                margin: 0 !important;
+                padding: 5px 10px !important;
+                line-height: 0;
+                max-height: 40px;
+            }
+
+            .ans {
+                padding: 5px 10px;
+                border: 1px solid rgb(42, 49, 64);
+                font-size: 12px;
+            }
+            .code{
+                font-size: 12px;
+            }
+            main {
+                padding-bottom: 0px;
+            }
+        </style>
+
     </head>
+
     <body>
         <header>
-            <div>Testy💚</div>
+            <h5>Testy💚</h5>
         </header>
         <main>
             <div class="b-container">
@@ -55,9 +127,56 @@
                 </form>
                 <hr>
             </div>
-            <pre><code>{CODE}</code></pre>
+            <h5>ENV</h5>
+            <pre><code class="code">{CODE}</code></pre>
         </main>
-        <script src="main.js"></script>
+        <script>
+            console.log("Hello World!")
+            const forms = ["sql", "exec"]
+
+            forms.forEach(name => {
+                let form = document.querySelector(`.form-${name}`)
+                let ans = document.querySelector(`.ans-${name}`)
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault()
+                    const formData = new FormData(form)
+                    var object = {}
+                    formData.forEach((value, key) => {
+                        // Reflect.has in favor of: object.hasOwnProperty(key)
+                        if (!Reflect.has(object, key)) {
+                            object[key] = value
+                            return
+                        }
+                        if (!Array.isArray(object[key])) {
+                            object[key] = [object[key]]
+                        }
+                        object[key].push(value)
+                    })
+                    var json = JSON.stringify(object)
+                    fetch(`/${name}`, {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: json,
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log('Success:', data)
+                            ans.style.color = "limegreen"
+                            
+                            ans.innerHTML = data.result
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error)
+                            ans.style.color = "coral"
+                            ans.innerHTML = error
+                        })
+                })
+            })
+
+        </script>
     </body>
 
 </html>

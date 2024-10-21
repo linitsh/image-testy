@@ -1,5 +1,6 @@
 import { template } from "./utils/template";
 import { config } from "./utils/config";
+import { ShellService } from "./utils/shell"
 async function formsRoute( req:Request, path:string, name:string, cb:Function ) {
             
     if (req.method === "POST" && path === `/${name}`) {
@@ -27,17 +28,27 @@ const server = Bun.serve({
         let cgf = await config();
 
         if (url.pathname === "/") {
-            let html = await Bun.file("./pages/index.html").text();
+            let html = await Bun.file("./pages/index/index.html").text();
             index.TIME = new Date().toLocaleTimeString();
             html = template(html, index);
             return new Response(html, { headers: { "Content-Type": "text/html", }, });
         }
 
-        const ans = await formsRoute(req, path, "sql", (data:any) => {
+        let result = await formsRoute(req, path, "sql", (data:any) => {
             console.log(data);
             return {}
         })
-        if(ans) return ans
+        if(result) return result
+        result = await formsRoute(req, path, "exec", (data:any) => {
+            console.log(data);
+            let shell = new ShellService()
+            let result = shell.exec(data)
+            const stdout = result.stdout.toString().trim()
+            const stderr = result.stderr.toString().trim()
+            const res = stderr ?  stderr  :  stdout 
+            return res
+        })
+        if(result) return result
 
         return new Response("404!");
 
