@@ -2,6 +2,7 @@ import type { Cfg } from "./shell.service.types"
 import path from 'node:path'
 import fs from 'node:fs'
 import { spawn, spawnSync } from 'node:child_process'
+console.log({spawn,spawnSync})
 function  abs(...paths: string[]): string {
     let result = ""
     result = path.resolve(...paths).replace(/\\/g, '/')

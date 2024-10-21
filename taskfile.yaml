@@ -15,12 +15,18 @@ tasks:
   - docker build -t ${NAME} .
 
   docker-run:
-  - task: docker-build
-  - docker run -d --rm --name ${NAME} -p 8080:3000 ${NAME} 
-  - echo "http://localhost:8080"
+    aliases:
+      - r
+    cmds:
+    - task: docker-build
+    - docker run -d --rm --name ${NAME} -p 8080:3000 ${NAME} 
+    - echo "http://localhost:8080"
 
   docker-stop:
-  - docker stop ${NAME}
+    aliases:
+      - s
+    cmds:
+    - docker stop ${NAME}
 
   push-image:
   - docker login -u ${DOCKER_USER} -p ${TOKEN}
@@ -31,5 +37,3 @@ tasks:
   - git add .
   - git commit -m {{ default "save" (q .CLI_ARGS) }}
   - git push
-
-  test: echo {{ default "save" (q .CLI_ARGS ) }}
