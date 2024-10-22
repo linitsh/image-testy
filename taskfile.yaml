@@ -3,6 +3,7 @@ version: '3'
 env:
   NAME: testy
   DOCKER_USER: linitsh
+  TAG: 0.0.1
 
 dotenv: 
   - .env
@@ -30,10 +31,10 @@ tasks:
     - docker stop ${NAME}
     - docker rm ${NAME}
 
-  push-image:
+  docker-push:
   - docker login -u ${DOCKER_USER} -p ${TOKEN}
-  - docker tag ${NAME} ${DOCKER_USER}/${NAME}
-  - docker push
+  - docker tag ${NAME} ${DOCKER_USER}/${NAME}:${TAG}
+  - docker push ${DOCKER_USER}/${NAME}:${TAG}
 
   save:
   - git add .
