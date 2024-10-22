@@ -1,6 +1,18 @@
-import { template } from "./utils/template";
-import { config } from "./utils/config";
+import { template } from "./utils/template"
+import { config as Config } from "./utils/config"
 import { ShellService } from "./utils/shell"
+import minimist from 'minimist'
+let {_, ...args} = minimist(process.argv.slice(2)) ?? {}
+console.log(args)
+if(args.error){
+    console.log(`error mode enabled`)
+    let rand = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+    if(rand > args.error){
+        console.log(`exit`)
+        process.exit(1)
+    }
+}
+
 async function formsRoute( req:Request, path:string, name:string, cb:Function ) {
             
     if (req.method === "POST" && path === `/${name}`) {
@@ -25,7 +37,7 @@ const server = Bun.serve({
         const url  = new URL(req.url);
         const path = url.pathname;
         console.log(req.method, `${path}`);
-        let cgf = await config();
+        let config = await Config();
 
         if (url.pathname === "/") {
             let html = await Bun.file("./index.html").text();
@@ -41,11 +53,11 @@ const server = Bun.serve({
         if(result) return result
         result = await formsRoute(req, path, "exec", (data:any) => {
             console.log(data);
-            let shell = new ShellService()
-            let result = shell.exec(data)
+            let shell    = new ShellService()
+            let result   = shell.exec(data)
             const stdout = result.stdout.toString().trim()
             const stderr = result.stderr.toString().trim()
-            const res = stderr ?  stderr  :  stdout 
+            const res    = stderr ? stderr : stdout 
             return res
         })
         if(result) return result
