@@ -12,14 +12,15 @@ tasks:
   start: bun run index.ts
 
   docker-build:
-  - docker build -t ${NAME} .
+  - docker build -f Dockerfile -t ${NAME} .
 
   docker-run:
     aliases:
       - r
     cmds:
+    # - task: docker-stop
     - task: docker-build
-    - docker run -d --rm --name ${NAME} -p 8080:3000 ${NAME} 
+    - docker run -d --name ${NAME} -p 8080:3000 ${NAME} 
     - echo "http://localhost:8080"
 
   docker-stop:
@@ -27,6 +28,7 @@ tasks:
       - s
     cmds:
     - docker stop ${NAME}
+    - docker rm ${NAME}
 
   push-image:
   - docker login -u ${DOCKER_USER} -p ${TOKEN}
@@ -37,3 +39,9 @@ tasks:
   - git add .
   - git commit -m {{ default "save" (q .CLI_ARGS) }}
   - git push
+
+
+  build-linux:
+    - bun build --compile --target=bun-linux-x64 ./index.ts --outfile ./testy
+  
+

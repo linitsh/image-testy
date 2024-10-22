@@ -18,7 +18,7 @@ export class ShellService {
 
 
     config :Cfg= {
-        shell     : 'bash',
+        shell     : '/bin/bash',
         args      : ["--login","-c","--"],
         prefix    : "set -euo pipefail;",
     } 

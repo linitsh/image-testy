@@ -24,11 +24,11 @@ const server = Bun.serve({
     async fetch(req) {
         const url  = new URL(req.url);
         const path = url.pathname;
-        console.log(req.method, `${Bun.color("blue","ansi")}${path}${Bun.color("white","ansi")}`);
+        console.log(req.method, `${path}`);
         let cgf = await config();
 
         if (url.pathname === "/") {
-            let html = await Bun.file("./pages/index/index.html").text();
+            let html = await Bun.file("./index.html").text();
             index.TIME = new Date().toLocaleTimeString();
             html = template(html, index);
             return new Response(html, { headers: { "Content-Type": "text/html", }, });
