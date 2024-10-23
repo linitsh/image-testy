@@ -34,7 +34,12 @@ tasks:
   docker-push:
   - docker login -u ${DOCKER_USER} -p ${TOKEN}
   - docker tag ${NAME} ${DOCKER_USER}/${NAME}:${TAG}
+  - docker tag ${NAME} ${DOCKER_USER}/${NAME}:latest
   - docker push ${DOCKER_USER}/${NAME}:${TAG}
+  - docker push ${DOCKER_USER}/${NAME}:latest
+
+  docker-connect: 
+  - docker exec -it ${NAME} bash
 
   save:
   - git add .
@@ -43,6 +48,6 @@ tasks:
 
 
   build-linux:
-    - bun build --compile --target=bun-linux-x64 ./index.ts --outfile ./testy
+  - bun build --compile --target=bun-linux-x64 ./index.ts --outfile ./testy
   
 

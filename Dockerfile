@@ -30,7 +30,8 @@ RUN bun run build
 FROM base AS release
 #COPY --from=install /temp/prod/node_modules node_modules
 WORKDIR /application
-RUN apt-get update && apt-get install -y curl nano mc
+RUN apt-get update && apt-get install -y curl nano mc 
+RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /bin
 COPY --from=prerelease /usr/src/app/app .
 COPY --from=prerelease /usr/src/app/config.yaml .
 COPY --from=prerelease /usr/src/app/index.html .
