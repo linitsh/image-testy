@@ -3,7 +3,7 @@ version: '3'
 env:
   NAME: testy
   DOCKER_USER: linitsh
-  TAG: 0.0.2
+  TAG: 0.0.3
 
 dotenv: 
   - .env
@@ -43,7 +43,7 @@ tasks:
 
   save:
   - git add .
-  - git commit -m {{ default "save" (q .CLI_ARGS) }}
+  - git commit -m {{ default (q .CLI_ARGS) "save"  }}
   - git push
 
 

@@ -13,6 +13,8 @@ if(args.error){
     }
 }
 
+
+
 async function formsRoute( req:Request, path:string, name:string, cb:Function ) {
             
     if (req.method === "POST" && path === `/${name}`) {
@@ -24,6 +26,17 @@ async function formsRoute( req:Request, path:string, name:string, cb:Function ) 
     }
     return false
 }
+
+async function probesRoute( req:Request, path:string, name:string ) {
+            
+    if (req.method === "GET" && path === `/${name}`) {
+        let res = args[name] ?? false
+        if(res)
+        return new Response(`<h4>${res} ok.</h4>`, { headers: { "Content-Type": "text/html" } });
+    }
+    return false
+}
+
 let index = {
     IMAGE   : process.env.IMAGE,
     VERSION : process.env.VERSION || 3,
@@ -43,7 +56,7 @@ const server = Bun.serve({
             let html = await Bun.file("./index.html").text();
             index.TIME = new Date().toLocaleTimeString();
             html = template(html, index);
-            return new Response(html, { headers: { "Content-Type": "text/html", }, });
+            return new Response(html, { headers: { "Content-Type": "text/html" } });
         }
 
         let result = await formsRoute(req, path, "sql", (data:any) => {
@@ -60,6 +73,13 @@ const server = Bun.serve({
             const res    = stderr ? stderr : stdout 
             return res
         })
+        if(result) return result
+
+        result = await probesRoute(req, path, "startup-probe")
+        if(result) return result
+        result = await probesRoute(req, path, "liveness-probe")
+        if(result) return result
+        result = await probesRoute(req, path, "readiness-probe")
         if(result) return result
 
         return new Response("404!");
