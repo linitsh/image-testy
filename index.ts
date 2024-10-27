@@ -32,7 +32,7 @@ async function probesRoute( req:Request, path:string, name:string ) {
     if (req.method === "GET" && path === `/${name}`) {
         let err = args[name] ? true : false
         if(err)
-        return new Response(`${path}: 400`,{status:400});
+        return new Response(`${path}: 404`,{status:404});
         return new Response(`${path}: 200`,{status:200});
     }
     return false
@@ -44,11 +44,6 @@ let index = {
     POD     : process.env.HOSTNAME,
     TIME    :  new Date().toLocaleTimeString(),
     CODE    : JSON.stringify(Bun.env, null, 2),
-    MENU    :`
-        <a class="b-nav__link" href="/startup-probe">startup-probe</a>
-        <a class="b-nav__link" href="/liveness-probe">liveness-probe</a>
-        <a class="b-nav__link" href="/readiness-probe">readiness-probe</a>
-    `
 }
 const server = Bun.serve({
     development: true,
@@ -88,7 +83,7 @@ const server = Bun.serve({
         result = await probesRoute(req, path, "readiness-probe")
         if(result) return result
 
-        return new Response("404!");
+        return new Response("404!", { status: 404 });
 
     },
 })

@@ -51,3 +51,7 @@ tasks:
   - bun build --compile --target=bun-linux-x64 ./index.ts --outfile ./testy
   
 
+  autosave:
+  - task: save
+  - task: build
+  - task: push
