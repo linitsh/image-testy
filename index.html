@@ -75,6 +75,19 @@
             main {
                 padding-bottom: 0px;
             }
+            .b-nav{
+                gap: 10px;
+                position: fixed;
+                right: 0;
+                top: 0;
+                display: flex;
+                padding-right: 15px;
+            }
+            .b-nav__link{
+                display: inline-block;
+                padding: 5px 10px;
+                color: coral
+            }
         </style>
 
     </head>
@@ -82,6 +95,11 @@
     <body>
         <header>
             <h5>Testy💚</h5>
+            <nav class="b-nav">
+                <a class="b-nav__link" href="/startup-probe">startup-probe</a>
+                <a class="b-nav__link" href="/liveness-probe">liveness-probe</a>
+                <a class="b-nav__link" href="/readiness-probe">readiness-probe</a>
+            </nav>
         </header>
         <main>
             <div class="b-container">

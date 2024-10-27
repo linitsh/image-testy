@@ -3,7 +3,7 @@ version: '3'
 env:
   NAME: testy
   DOCKER_USER: linitsh
-  TAG: 0.0.3
+  TAG: 0.0.4
 
 dotenv: 
   - .env
@@ -12,33 +12,33 @@ tasks:
 
   start: bun run index.ts
 
-  docker-build:
+  build:
   - docker build -f Dockerfile -t ${NAME} .
 
-  docker-run:
+  run:
     aliases:
       - r
     cmds:
     # - task: docker-stop
-    - task: docker-build
+    - task: build
     - docker run -d --name ${NAME} -p 8080:3000 ${NAME} 
     - echo "http://localhost:8080"
 
-  docker-stop:
+  stop:
     aliases:
       - s
     cmds:
     - docker stop ${NAME}
     - docker rm ${NAME}
 
-  docker-push:
+  push:
   - docker login -u ${DOCKER_USER} -p ${TOKEN}
   - docker tag ${NAME} ${DOCKER_USER}/${NAME}:${TAG}
   - docker tag ${NAME} ${DOCKER_USER}/${NAME}:latest
   - docker push ${DOCKER_USER}/${NAME}:${TAG}
   - docker push ${DOCKER_USER}/${NAME}:latest
 
-  docker-connect: 
+  connect: 
   - docker exec -it ${NAME} bash
 
   save:
