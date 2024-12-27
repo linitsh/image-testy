@@ -118,19 +118,6 @@
             </div>
             <hr>
             <div>
-                <form class="b-form form-sql">
-                    <h5>SQL</h5>
-                    <div>
-                        <input name="sql" type="text" value="SELECT * FROM testy;">
-                    </div>
-                    <div>
-                        <button type="submit">Submit</button>
-                    </div>
-                    <div>
-                        <pre><code class="ans-sql ans"></code></pre>
-                    </div>
-                </form>
-                <hr>
                 <form class="b-form form-exec">
                     <h5>EXEC</h5>
                     <div>
@@ -150,7 +137,7 @@
         </main>
         <script>
             console.log("Hello World!")
-            const forms = ["sql", "exec"]
+            const forms = ["exec"]
 
             forms.forEach(name => {
                 let form = document.querySelector(`.form-${name}`)
@@ -174,23 +161,22 @@
                     fetch(`/${name}`, {
                         method: "POST",
                         headers: {
-                            'Accept': 'application/json',
+                            'Accept'      : 'application/json',
                             'Content-Type': 'application/json'
                         },
                         body: json,
                     })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            console.log('Success:', data)
-                            ans.style.color = "limegreen"
-                            
-                            ans.innerHTML = data.result
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error)
-                            ans.style.color = "coral"
-                            ans.innerHTML = error
-                        })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Success:', data)
+                        ans.style.color = "limegreen"
+                        ans.innerHTML = data.result
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error)
+                        ans.style.color = "coral"
+                        ans.innerHTML = error
+                    })
                 })
             })
 

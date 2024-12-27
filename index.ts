@@ -60,12 +60,7 @@ const server = Bun.serve({
             return new Response(html, { headers: { "Content-Type": "text/html" } });
         }
 
-        let result = await formsRoute(req, path, "sql", (data:any) => {
-            console.log(data);
-            return {}
-        })
-        if(result) return result
-        result = await formsRoute(req, path, "exec", (data:any) => {
+        let result = await formsRoute(req, path, "exec", (data:any) => {
             console.log(data);
             let shell    = new ShellService()
             let result   = shell.exec(data)
