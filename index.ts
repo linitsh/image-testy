@@ -39,8 +39,8 @@ async function probesRoute( req:Request, path:string, name:string ) {
 }
 
 let index = {
-    IMAGE   : process.env.IMAGE,
-    VERSION : process.env.VERSION || 3,
+    IMAGE   : process.env.IMAGE   || "linitsh/testy",
+    VERSION : process.env.VERSION || "0.0.6",
     POD     : process.env.HOSTNAME,
     TIME    :  new Date().toLocaleTimeString(),
     CODE    : JSON.stringify(Bun.env, null, 2),

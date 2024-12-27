@@ -3,7 +3,7 @@ version: '3'
 env:
   NAME: testy
   DOCKER_USER: linitsh
-  TAG: 0.0.5
+  TAG: 0.0.6
 
 dotenv: 
   - .env
